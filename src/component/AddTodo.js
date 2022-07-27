@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, TextField } from "@mui/material";
 import { DesktopDatePicker , LocalizationProvider} from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import Axios from "axios";
 
 class AddTodo extends Component {
   // Create a local react state of the this component with both content date property set to nothing.
@@ -39,6 +40,22 @@ class AddTodo extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.content.trim()) {
+      const jsonObject = {
+        id: this.state.id,
+        task: this.state.content,
+        currentDate: this.state.date,
+        dueDate: this.state.dueDate
+     };
+     Axios({
+      method: "POST",
+      url: "http://localhost:8080/add/item",
+      data: {jsonObject},
+      headers: {
+         "Content-Type": "application/json"
+      }
+   }).then(res => {
+      console.log(res.data.message);
+   });
       this.props.addTodo(this.state);
       this.setState({
         content: "",
@@ -56,12 +73,13 @@ class AddTodo extends Component {
       // 3. The return should also include a button with the handleSubmit function from above that is passed into
       // an OnClick event.
       // 4. The value of the text field also should reflect the local state of this component.
-      <div>
+      <div data-testid = "new-item-button">
         <TextField
           label="Add New Item"
           variant="outlined"
           onChange={this.handleChange}
           value={this.state.content}
+          data-testid="new-item-input"
         />
         <LocalizationProvider dateAdapter={AdapterDateFns}>         
           <DesktopDatePicker
