@@ -5,7 +5,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import Axios from "axios";
 
 class AddTodo extends Component {
-  // Create a local react state of the this component with both content date property set to nothing.
+  // Created a local react state of the this component with both content date property set to nothing.
   constructor() {
     super();
     this.state = {
