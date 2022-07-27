@@ -2,7 +2,7 @@ import React from "react";
 import "../component/todos.css";
 import { Card, Grid, ListItemButton, ListItemText, Checkbox} from "@mui/material";
 
-// 1. This component formats and returns the list of todos.
+// 1. This component formats and returns the list of todos. 2
 // 2. Treat the question mark like an if statement.
 // If the todos array has items in the list [todos.length], we want to return the list
 // Else, return a message saying "You have no todo's left"
